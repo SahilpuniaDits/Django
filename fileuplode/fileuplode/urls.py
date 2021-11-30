@@ -21,5 +21,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('profile',views.uplodefile.as_view())
+    path('profile',views.uplodefile.as_view()),
+    path('profileCrud/<int:id>/',views.fileuploadcrud.as_view())
+
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
