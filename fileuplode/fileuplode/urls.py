@@ -1,4 +1,4 @@
-"""emailTutorial URL Configuration
+"""fileuplode URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.2/topics/http/urls/
@@ -14,15 +14,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path,include
-
+from django.urls import path
+from uplode_api import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('first.urls')),
-    path('', include('img.urls')),
-
-
-]
-# if settings.DEBUG:
-#     urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+    path('profile',views.uplodefile.as_view())
+]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
