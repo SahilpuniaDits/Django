@@ -8,6 +8,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.http import HttpResponse
 from rest_framework import status
+import os
 # Create your views here.
 
 
@@ -21,7 +22,7 @@ class uplodefile(APIView):
 
     def get(self,request):
         data = profile.objects.all()
-        serializer= profileSerializer(data,many=True)
+        serializer= profileSerializer(data ,many=True)
         return Response(serializer.data)
 
 class fileuploadcrud(APIView):
@@ -50,3 +51,9 @@ class fileuploadcrud(APIView):
         students = self.get_object(id)
         students.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+#  if request.method == 'POST':
+#                 if len(request.image)!=0:
+#                     if len(students.image) >0:
+#                         os.remove(students.image.path)

@@ -12,15 +12,15 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AddField(
-            model_name='profile',
-            name='file',
-            field=models.FileField(default=django.utils.timezone.now, upload_to=uplode_api.models.profile.nameFile),
-            preserve_default=False,
-        ),
+        # migrations.AddField(
+        #     model_name='profile',
+        #     name='file',
+        #     field=models.FileField(default=django.utils.timezone.now, upload_to=uplode_api.models.profile.nameFile),
+        #     preserve_default=False,
+        # ),
         migrations.AlterField(
             model_name='profile',
             name='picture',
-            field=models.ImageField(upload_to=uplode_api.models.profile.nameFile),
+            field=models.ImageField(upload_to=uplode_api.models.profile),
         ),
     ]
