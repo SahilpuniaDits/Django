@@ -14,14 +14,16 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,include
 from uplode_api import views
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('email/',include("emailApi.urls")),
     path('profile',views.uplodefile.as_view()),
-    path('profileCrud/<int:id>/',views.fileuploadcrud.as_view())
+    path('profileCrud/<int:id>/',views.fileuploadcrud.as_view()),
+
 
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
