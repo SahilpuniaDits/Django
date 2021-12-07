@@ -1,5 +1,7 @@
+import os
 from django.core import mail
 from django.shortcuts import render
+
 from .models import emailApi
 from .seralizers import emailApiSerializer
 from rest_framework import serializers
@@ -15,8 +17,10 @@ from django.core.mail import EmailMessage,send_mail
 from rest_framework.response import Response
 from rest_framework import status
 from django.core.mail import EmailMultiAlternatives
-
-
+from mimetypes import guess_type
+from os.path import basename
+from email.mime.base import MIMEBase
+from email import encoders
 # Create your views here.
 
 class Sendemail(APIView):
@@ -25,13 +29,21 @@ class Sendemail(APIView):
         if serializer.is_valid():
             serializer.save()
             print(serializer,'>>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
-            send_mail(serializer.data['subject'], serializer.data['content'], 'sahilpuniawins@gmail.com', [
-                serializer.data['send_to']])
-            # print(serializer.data,'<<<<<<<<<<<<<<<<<<<<<<<<')    
-            # EmailMultiAlternatives.attach_file(serializer.data['attechment'])
-            # person.upload.file.name
-            # print(">......................",serializer.data['attechment'])
-            # send_mail.send()
+            #for 
+            email = EmailMultiAlternatives(serializer.data['subject'], serializer.data['content'],
+             'sahilpuniawins@gmail.com', [
+                serializer.data['send_to']], 
+                )
+
+           
+            print("READ",os.path.join(os.path.realpath('.'),serializer.data['attechment'].lstrip("/")))
+            attachment = open(os.path.join(os.path.realpath('.'),serializer.data['attechment'].lstrip("/")), 'rb')
+            email.attach(serializer.data['attechment'].lstrip("/media/"), attachment.read())
+           
+            email.send()
+           
+
+           
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
