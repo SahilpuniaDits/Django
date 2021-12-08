@@ -26,14 +26,27 @@ from email import encoders
 class Sendemail(APIView):
     def post(self,request):
         serializer = emailApiSerializer(data=request.data)
+        # multiemail = ['send_to']
+        # a=multiemail.append('send_to')
+       
+
         if serializer.is_valid():
             serializer.save()
-            print(serializer,'>>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
-            #for 
+            print(serializer,'>>>>>>>><<<<<<<<<<>>>>>>>>')
+            # b=serializer.data[a]
+            # print(b)
+            # print(a)
+            follower = (serializer.data['send_to'])
+            # follower=['sahilpunia094@gmail','com,malaksingh@gmail.com']
+            list =[]
+            # for send_to in follower:
+            list.append(follower)  
+            #     # print(list)
+            print('>>>>>>', list)
             email = EmailMultiAlternatives(serializer.data['subject'], serializer.data['content'],
-             'sahilpuniawins@gmail.com', [
-                serializer.data['send_to']], 
+             'sahilpuniawins@gmail.com', list, 
                 )
+             
 
            
             print("READ",os.path.join(os.path.realpath('.'),serializer.data['attechment'].lstrip("/")))
