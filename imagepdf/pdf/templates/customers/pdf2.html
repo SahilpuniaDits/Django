@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {{customer}}
+    <hr>
+    {{customer.description|linebreaks}}
+    <br>
+    {{customer.logo}}
+    <br>
+    {{customer.logo.url}}
+    <br>
+    {{customer.logo.path}}
+
+    <img src ="{{customer.logo.path}}" height = '200px'>
+    {% comment %} <img src ="media/{{customer.logo}}" > {% endcomment %}
+
+</body>
+</html>
